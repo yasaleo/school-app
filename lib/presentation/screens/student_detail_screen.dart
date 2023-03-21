@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_app/data_layer/state/app_state.dart';
 import 'package:school_app/presentation/widgets/constants.dart';
 
 import '../../data_layer/model/schooll_model.dart';
@@ -6,18 +7,24 @@ import '../../data_layer/model/schooll_model.dart';
 class StudentDetailScreen extends StatelessWidget {
   StudentDetailScreen({
     super.key,
-    required this.studentDetail,
-    required this.index,
+   
   });
 
-  StudentsDetail studentDetail;
-  int index;
+ late StudentsDetail studentDetail;
+  // int index;
 
   @override
   Widget build(BuildContext context) {
+    studentDetail = AppState.studentDetail!;
     return Scaffold(
       backgroundColor: Colors.green[100],
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            AppState.stateNotifier.value = SState.studentsView;
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
         title: const Text("Student Detail"),
       ),
       body: SafeArea(
@@ -28,7 +35,7 @@ class StudentDetailScreen extends StatelessWidget {
               children: [
                 _BasicDetail(
                   studentDetail: studentDetail,
-                  index: index,
+                  // index: index,
                 ),
                 const SizedBox(
                   height: 25,
@@ -118,13 +125,13 @@ class _BasicDetail extends StatelessWidget {
   _BasicDetail({
     Key? key,
     required this.studentDetail,
-    required this.index,
+    // required this.index,
 
 
   }) : super(key: key);
 
   StudentsDetail studentDetail;
-  int index;
+  // int index;
 
 
   @override
@@ -148,7 +155,7 @@ class _BasicDetail extends StatelessWidget {
                   width: 25,
                 ),
                 Hero(
-                  tag: 'studentname$index',
+                  tag: 'studentnameindex',
                   child: Text(
                     studentDetail.name!,
                     style: Theme.of(context).textTheme.headline5,
@@ -169,7 +176,7 @@ class _BasicDetail extends StatelessWidget {
                   width: 75,
                 ),
                 Hero(
-                  tag: 'studentrollnum$index',
+                  tag: 'studentrollnumindex',
                   child: Text(
                     studentDetail.rollNum.toString(),
                     style: Theme.of(context).textTheme.headline5,

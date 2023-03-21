@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:school_app/data_layer/model/schooll_model.dart';
+import 'package:school_app/data_layer/state/app_state.dart';
 import 'package:school_app/presentation/screens/class_detail_screen.dart';
 
 import 'constants.dart';
@@ -24,14 +25,10 @@ class ClassCard extends StatelessWidget {
       onTap: () async {
         await Future.delayed(const Duration(milliseconds: 300));
 
-        Navigator.of(context).push(
-          CupertinoPageRoute(
-            builder: (context) => ClassDetailScreen(
-              classDetail: classDetail,
-              index: index,
-            ),
-          ),
-        );
+        
+
+        AppState.stateNotifier.value = SState.studentsView;
+        AppState.classDetail =classDetail;
       },
       borderRadius: BorderRadius.circular(15),
       radius: 100,

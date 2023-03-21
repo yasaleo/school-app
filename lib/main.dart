@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school_app/data_layer/services/services.dart';
+import 'package:school_app/presentation/screens/base_screen.dart';
 import 'package:school_app/presentation/screens/splash_screen.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.green,
       ),
-      home: const SplashScreen(),
+      home: const BaseScreen(),
     );
   }
 }

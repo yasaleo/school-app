@@ -1,10 +1,7 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:school_app/data_layer/services/services.dart';
+import 'package:school_app/data_layer/state/app_state.dart';
 
-import 'package:school_app/presentation/screens/classes_screen.dart';
 import 'package:school_app/presentation/widgets/animated_number.dart';
 import 'package:school_app/presentation/widgets/constants.dart';
 
@@ -24,87 +21,92 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.green[100],
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: FutureBuilder(
-          future: Services().loadData(),
-            builder: (BuildContext context, AsyncSnapshot<SchoolModel> snapShot) {
-          if (snapShot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(
-                color: Colors.green[400],
-              ),
-            );
-          }
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: FutureBuilder(
+            future: Services().loadData(),
+            builder:
+                (BuildContext context, AsyncSnapshot<SchoolModel> snapShot) {
+              if (snapShot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.green[400],
+                  ),
+                );
+              }
 
-          if (snapShot.hasData && snapShot.connectionState == ConnectionState.done) {
-            final schoolDetails = snapShot.requireData;
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.school_outlined,
-                  size: 60,
-                  color: Colors.green,
-                ),
-                AnimatedText(
-                  content: schoolDetails.schoolName!,
-                ),
-                height10,
-                const Text(
-                  "Number of Classes",
-                  style: TextStyle(fontSize: 18),
-                ),
-                const Icon(Icons.arrow_drop_down),
-                CustomAnimatedNumber(
-                  num: schoolDetails.num0FClasses!,
-                ),
-                height10,
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white, elevation: 10),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      CupertinoPageRoute(
-                        builder: (context) =>  ClassesScreen(
-                          classesList: schoolDetails.detailsOfClasses!,
-                        ),
+              if (snapShot.hasData &&
+                  snapShot.connectionState == ConnectionState.done) {
+                final schoolDetails = snapShot.requireData;
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.school_outlined,
+                      size: 60,
+                      color: Colors.green,
+                    ),
+                    AnimatedText(
+                      content: schoolDetails.schoolName!,
+                    ),
+                    height10,
+                    const Text(
+                      "Number of Classes",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    const Icon(Icons.arrow_drop_down),
+                    CustomAnimatedNumber(
+                      num: schoolDetails.num0FClasses!,
+                    ),
+                    height10,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white, elevation: 10),
+                      onPressed: () {
+                        // Navigator.of(context).push(
+                        //   CupertinoPageRoute(
+                        //     builder: (context) =>  ClassesScreen(
+                        //       classesList: schoolDetails.detailsOfClasses!,
+                        //     ),
+                        //   ),
+                        // );
+                        AppState.stateNotifier.value = SState.classesView;
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "View All ",
+                            style: TextStyle(color: Colors.green[800]),
+                          ),
+                          const Icon(
+                            Icons.arrow_circle_right_outlined,
+                          )
+                        ],
                       ),
-                    );
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "View All ",
-                        style: TextStyle(color: Colors.green[800]),
+                    ),
+                    height10,
+                    Hero(
+                      tag: "tag-home",
+                      transitionOnUserGestures: true,
+                      child: Text(
+                        "Classes",
+                        style: style,
                       ),
-                      const Icon(
-                        Icons.arrow_circle_right_outlined,
-                      )
-                    ],
+                    )
+                  ],
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.green[400],
                   ),
-                ),
-                height10,
-                Hero(
-                  tag: "tag-home",
-                  transitionOnUserGestures: true,
-                  child: Text(
-                    "Classes",
-                    style: style,
-                  ),
-                )
-              ],
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(
-                color: Colors.green[400],
-              ),
-            );
-          }
-        }),
-      )),
+                );
+              }
+            },
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:school_app/data_layer/model/schooll_model.dart';
+import 'package:school_app/data_layer/services/services.dart';
 
+import '../../data_layer/state/app_state.dart';
 import '../widgets/class_card.dart';
 
 class ClassesScreen extends StatelessWidget {
-   ClassesScreen({
-    
+  ClassesScreen({
     super.key,
-    required this.classesList
-    });
+    // required this.classesList
+  });
 
-  List<DetailsOfClass> classesList;
+  late List<DetailsOfClass> classesList;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,12 @@ class ClassesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.green[100],
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            AppState.stateNotifier.value = SState.schoolView;
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
         centerTitle: false,
         title: Hero(
             tag: "tag-home",
@@ -30,26 +37,40 @@ class ClassesScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              mainAxisSpacing: 30,
-              crossAxisSpacing: 30,
-              maxCrossAxisExtent: 220,
-                childAspectRatio: 1/.9
-            ),
-            itemBuilder: (context, index) {
+          child: FutureBuilder(
+            future: Services().loadData(),
+            builder:
+                (BuildContext context, AsyncSnapshot<SchoolModel> snapShot) {
+              if (snapShot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
 
-              return  ClassCard(
-                classDetail: classesList[index],
-                index: index,
+              if (snapShot.hasData) {
+                classesList = snapShot.requireData.detailsOfClasses!;
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      mainAxisSpacing: 30,
+                      crossAxisSpacing: 30,
+                      maxCrossAxisExtent: 220,
+                      childAspectRatio: 1 / .9),
+                  itemBuilder: (context, index) {
+                    return ClassCard(
+                      classDetail: classesList[index],
+                      index: index,
+                    );
+                  },
+                  itemCount: classesList.length,
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
               );
             },
-            itemCount: classesList.length,
           ),
         ),
       ),
     );
   }
 }
-
-

@@ -1,27 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:school_app/presentation/screens/student_detail_screen.dart';
+import 'package:school_app/data_layer/state/app_state.dart';
 import 'package:school_app/presentation/widgets/constants.dart';
 
 import '../../data_layer/model/schooll_model.dart';
 
 class ClassDetailScreen extends StatelessWidget {
-  ClassDetailScreen(
-      {super.key, required this.index, required this.classDetail});
-  final DetailsOfClass classDetail;
-
-  int index;
+  ClassDetailScreen({
+    super.key,
+  });
+  late DetailsOfClass classDetail;
 
   @override
   Widget build(BuildContext context) {
+    classDetail = AppState.classDetail!;
     final TextStyle style = Theme.of(context).textTheme.titleMedium!.copyWith(
         fontSize: 20, fontWeight: FontWeight.normal, color: Colors.green[900]);
 
     return Scaffold(
       backgroundColor: Colors.green[100],
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            AppState.stateNotifier.value = SState.classesView;
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
         title: Hero(
-          tag: "tag-$index",
+          tag: "tag-x",
           child: Text(
             classDetail.className!,
             style: style,
@@ -33,74 +38,78 @@ class ClassDetailScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           if (index == 0) {
             return _headerDetails(context);
-          }else{
-          return StudentCard(
-            studentDetail: classDetail.studentsDetails![index-1],
-            index: index,
-          );}
+          } else {
+            return StudentCard(
+              studentDetail: classDetail.studentsDetails![index - 1],
+              index: index,
+            );
+          }
         },
-        itemCount: classDetail.studentsDetails!.length+1,
+        itemCount: classDetail.studentsDetails!.length + 1,
       )),
     );
   }
 
   Padding _headerDetails(BuildContext context) {
     return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.green[200],
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Class teacher : ",
-                              style: Theme.of(context).textTheme.bodyText2,
-                            ),
-                            Text(
-                              classDetail.classTeacher!,
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Number of Students : ",
-                              style: Theme.of(context).textTheme.bodyText2,
-                            ),
-                            Text(
-                              classDetail.totalnumberOfStudents.toString(),
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.green[200],
+                borderRadius: BorderRadius.circular(15)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 10,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Class teacher : ",
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Text(
+                        classDetail.classTeacher!,
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                    ],
                   ),
-                ),
-                height10,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    Text("List of Students"),
-                    Icon(Icons.arrow_downward_rounded,size: 15,)
-                  ],
-                )
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Number of Students : ",
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Text(
+                        classDetail.totalnumberOfStudents.toString(),
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          );
+          ),
+          height10,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: const [
+              Text("List of Students"),
+              Icon(
+                Icons.arrow_downward_rounded,
+                size: 15,
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -122,14 +131,9 @@ class StudentCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         onTap: () async {
           await Future.delayed(const Duration(milliseconds: 250));
-          Navigator.of(context).push(
-            CupertinoPageRoute(
-              builder: (context) => StudentDetailScreen(
-                studentDetail: studentDetail,
-                index: index,
-              ),
-            ),
-          );
+
+          AppState.stateNotifier.value = SState.studentDetailView;
+          AppState.studentDetail = studentDetail;
         },
         splashColor: Colors.green,
         radius: 500,
