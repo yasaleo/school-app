@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/data_layer/state/app_state.dart';
 import 'package:school_app/presentation/widgets/constants.dart';
 
+import '../../cubit/navigation_cubit/navigation_cubit.dart';
 import '../../data_layer/model/schooll_model.dart';
 
 class StudentDetailScreen extends StatelessWidget {
@@ -21,7 +23,8 @@ class StudentDetailScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            AppState.stateNotifier.value = PageState.studentsView;
+            // AppState.stateNotifier.value = PageState.studentsView;
+             BlocProvider.of<NavigationCubit>(context).navigateTo(PageState.studentsView);
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),

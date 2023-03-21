@@ -6,7 +6,7 @@ enum PageState { schoolView, classesView, studentsView, studentDetailView }
 
 class AppState {
   
- static  ValueNotifier<PageState> stateNotifier = ValueNotifier(PageState.schoolView); 
+//  static  ValueNotifier<PageState> stateNotifier = ValueNotifier(PageState.schoolView); 
 
   static  DetailsOfClass? classDetail;
   static StudentsDetail? studentDetail;

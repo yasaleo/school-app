@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/data_layer/model/schooll_model.dart';
 import 'package:school_app/data_layer/services/services.dart';
 
+import '../../cubit/navigation_cubit/navigation_cubit.dart';
 import '../../data_layer/state/app_state.dart';
 import '../widgets/class_card.dart';
 
@@ -22,7 +24,8 @@ class ClassesScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            AppState.stateNotifier.value = PageState.schoolView;
+            // AppState.stateNotifier.value = PageState.schoolView;
+             BlocProvider.of<NavigationCubit>(context).navigateTo(PageState.schoolView);
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),

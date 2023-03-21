@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/data_layer/services/services.dart';
 import 'package:school_app/presentation/screens/class_detail_screen.dart';
 import 'package:school_app/presentation/screens/home_screen.dart';
 import 'package:school_app/presentation/screens/student_detail_screen.dart';
 
+import '../../cubit/navigation_cubit/navigation_cubit.dart';
 import '../../data_layer/model/schooll_model.dart';
 import '../../data_layer/state/app_state.dart';
 import 'classes_screen.dart';
@@ -13,40 +17,23 @@ class BaseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Services().loadData(),
-      builder: (BuildContext context, AsyncSnapshot<SchoolModel> snapShot) {
-        if (snapShot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+    return BlocBuilder<NavigationCubit, NavigationState>(
+      builder: (context, state) {
+        if (state is NavigationInitial) {
+          return state.initialScreen;
         }
-        if (snapShot.hasData &&
-            snapShot.connectionState == ConnectionState.done) {
-              final data = snapShot.requireData;
-          return ValueListenableBuilder(
-            valueListenable: AppState.stateNotifier,
-            builder: (BuildContext context, PageState state, _) {
-              return buildScreens(st: state,);
-            },
-          );
+        if (state is NavigatedScreens) {
+         
+          return state.screen;
         }
         return const Center(
           child: CircularProgressIndicator(),
         );
       },
     );
-  }
 
-  Widget buildScreens({required PageState st, }) {
-    switch (st) {
-      case PageState.classesView:
-        return ClassesScreen();
-        case PageState.studentsView:
-        return ClassDetailScreen( );
-        case PageState.studentDetailView:
-        return StudentDetailScreen();
-      default:{
-        return const HomeScreen();
-      }
-    }
   }
 }
+
+
+

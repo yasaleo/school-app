@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/data_layer/services/services.dart';
 import 'package:school_app/data_layer/state/app_state.dart';
 
 import 'package:school_app/presentation/widgets/animated_number.dart';
 import 'package:school_app/presentation/widgets/constants.dart';
 
+import '../../cubit/navigation_cubit/navigation_cubit.dart';
 import '../../data_layer/model/schooll_model.dart';
 import '../widgets/animated_text.dart';
 
@@ -63,7 +65,8 @@ class HomeScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white, elevation: 10),
                       onPressed: () {
-                        AppState.stateNotifier.value = PageState.classesView;
+                        
+                         BlocProvider.of<NavigationCubit>(context).navigateTo(PageState.classesView);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
