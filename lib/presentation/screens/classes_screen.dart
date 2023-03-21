@@ -22,7 +22,7 @@ class ClassesScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            AppState.stateNotifier.value = SState.schoolView;
+            AppState.stateNotifier.value = PageState.schoolView;
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),

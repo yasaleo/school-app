@@ -63,14 +63,7 @@ class HomeScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white, elevation: 10),
                       onPressed: () {
-                        // Navigator.of(context).push(
-                        //   CupertinoPageRoute(
-                        //     builder: (context) =>  ClassesScreen(
-                        //       classesList: schoolDetails.detailsOfClasses!,
-                        //     ),
-                        //   ),
-                        // );
-                        AppState.stateNotifier.value = SState.classesView;
+                        AppState.stateNotifier.value = PageState.classesView;
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,

@@ -21,7 +21,7 @@ class StudentDetailScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            AppState.stateNotifier.value = SState.studentsView;
+            AppState.stateNotifier.value = PageState.studentsView;
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -67,7 +67,7 @@ class _MarkTable extends StatelessWidget {
       ),
       dataRowHeight: 70,
       horizontalMargin: 60,
-      columns: [
+      columns:const [
         DataColumn(
           label: Text("Subject"),
         ),

@@ -21,7 +21,7 @@ class ClassDetailScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            AppState.stateNotifier.value = SState.classesView;
+            AppState.stateNotifier.value = PageState.classesView;
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -132,7 +132,7 @@ class StudentCard extends StatelessWidget {
         onTap: () async {
           await Future.delayed(const Duration(milliseconds: 250));
 
-          AppState.stateNotifier.value = SState.studentDetailView;
+          AppState.stateNotifier.value = PageState.studentDetailView;
           AppState.studentDetail = studentDetail;
         },
         splashColor: Colors.green,

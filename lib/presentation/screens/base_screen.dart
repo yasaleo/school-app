@@ -24,8 +24,8 @@ class BaseScreen extends StatelessWidget {
               final data = snapShot.requireData;
           return ValueListenableBuilder(
             valueListenable: AppState.stateNotifier,
-            builder: (BuildContext context, SState state, _) {
-              return buildScreens(st: state,model: data);
+            builder: (BuildContext context, PageState state, _) {
+              return buildScreens(st: state,);
             },
           );
         }
@@ -36,13 +36,13 @@ class BaseScreen extends StatelessWidget {
     );
   }
 
-  Widget buildScreens({required SState st, required SchoolModel model}) {
+  Widget buildScreens({required PageState st, }) {
     switch (st) {
-      case SState.classesView:
+      case PageState.classesView:
         return ClassesScreen();
-        case SState.studentsView:
+        case PageState.studentsView:
         return ClassDetailScreen( );
-        case SState.studentDetailView:
+        case PageState.studentDetailView:
         return StudentDetailScreen();
       default:{
         return const HomeScreen();

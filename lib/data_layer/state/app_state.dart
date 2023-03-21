@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../model/schooll_model.dart';
 
-enum SState { schoolView, classesView, studentsView, studentDetailView }
+enum PageState { schoolView, classesView, studentsView, studentDetailView }
 
 class AppState {
   
- static  ValueNotifier<SState> stateNotifier = ValueNotifier(SState.schoolView); 
+ static  ValueNotifier<PageState> stateNotifier = ValueNotifier(PageState.schoolView); 
 
   static  DetailsOfClass? classDetail;
   static StudentsDetail? studentDetail;
