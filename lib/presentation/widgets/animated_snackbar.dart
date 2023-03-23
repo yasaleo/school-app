@@ -15,6 +15,8 @@ class _AnimatedSnackbarState extends State<AnimatedSnackbar>
   late Animation<Color?> colorAnimation;
 
   int reeatedTimes = 0;
+
+  bool isFirst = true;
   @override
   void initState() {
     initAnimation();
@@ -34,21 +36,22 @@ class _AnimatedSnackbarState extends State<AnimatedSnackbar>
       child: const Center(
           child: Text(
         "something went  wrong",
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
       )),
     );
   }
 
   void initAnimation()async {
+    
     controller = AnimationController(
     
       vsync: this,
-      duration: const Duration(milliseconds: 250),
+      duration: const Duration(milliseconds: 180),
     );
     colorAnimation =
         ColorTween(begin: Colors.white, end: Colors.red[400]).animate(
       CurvedAnimation(
-          parent: controller, curve: Curves.easeInOut),
+          parent: controller, curve: Curves.fastOutSlowIn),
     );
     controller.addListener(() {
       if (!mounted) return;
@@ -61,7 +64,7 @@ class _AnimatedSnackbarState extends State<AnimatedSnackbar>
           if (!mounted) return;
             setState(() {
               if (controller.isDismissed) {
-                if (reeatedTimes != 1) {
+                if (reeatedTimes != 2) {
                   reeatedTimes = ++reeatedTimes;
 
                   repeat();
@@ -72,7 +75,11 @@ class _AnimatedSnackbarState extends State<AnimatedSnackbar>
         });
       }
     });
-   
+    if (isFirst) {
+    await Future.delayed(const Duration(milliseconds: 300));
+    isFirst = false;
+      
+    }
     controller.forward();
   }
 
