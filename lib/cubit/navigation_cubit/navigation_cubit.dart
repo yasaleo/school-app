@@ -12,7 +12,7 @@ part 'navigation_state.dart';
 class NavigationCubit extends Cubit<NavigationState> {
   NavigationCubit()
       : super(NavigationInitial(
-          initialScreen: const HomeScreen(),
+          initialScreen:  HomeScreen(),
         ));
 
   navigateTo(PageState st) async {
@@ -25,7 +25,7 @@ class NavigationCubit extends Cubit<NavigationState> {
 
     await Future.delayed(const Duration(milliseconds: 200));
     emit(NavigationFailure(errorMessage: "oops something went too faaaar"));
-    emit(NavigationInitial(initialScreen: const HomeScreen()));
+    emit(NavigationInitial(initialScreen:  HomeScreen()));
   }
 
   Future _navigation(PageState st) async {
@@ -43,7 +43,7 @@ class NavigationCubit extends Cubit<NavigationState> {
         return;
       default:
         {
-          emit(NavigatedScreens(screen: const HomeScreen()));
+          emit(NavigatedScreens(screen:  HomeScreen()));
           return;
         }
     }

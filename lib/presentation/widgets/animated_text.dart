@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AnimatedText extends StatefulWidget {
-   AnimatedText({
-    super.key,
-    required this.content
-    });
+  AnimatedText({super.key, required this.content});
 
   String content;
 
@@ -41,7 +38,6 @@ class _HomeScreenState extends State<AnimatedText>
   }
 
   void initAnimation() async {
-   
     controller = AnimationController(
       vsync: this,
       duration: const Duration(
@@ -53,15 +49,21 @@ class _HomeScreenState extends State<AnimatedText>
       CurvedAnimation(parent: controller, curve: Curves.elasticOut),
     );
 
-  
-
-     await Future.delayed(
+    await Future.delayed(
       const Duration(milliseconds: 100),
     );
 
     controller.addListener(() {
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     });
     controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }

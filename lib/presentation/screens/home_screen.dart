@@ -11,7 +11,8 @@ import '../../data_layer/model/schooll_model.dart';
 import '../widgets/animated_text.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+   HomeScreen({super.key});
+   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class HomeScreen extends StatelessWidget {
           color: Colors.green[900],
         );
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.green[100],
       body: SafeArea(
         child: Padding(
