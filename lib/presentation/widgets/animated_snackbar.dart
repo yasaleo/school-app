@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -46,7 +45,8 @@ class _AnimatedSnackbarState extends State<AnimatedSnackbar>
     controller = AnimationController(
     
       vsync: this,
-      duration: const Duration(milliseconds: 180),
+      duration: const Duration(milliseconds: 130,),
+      reverseDuration: const Duration(milliseconds: 250)
     );
     colorAnimation =
         ColorTween(begin: Colors.white, end: Colors.red[400]).animate(
