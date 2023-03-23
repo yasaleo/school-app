@@ -1,0 +1,224 @@
+{
+	"SHOW_TIMEOUT_ALERT_MSG": true,
+	"data": [
+		{
+			"availableTimings": [
+				{
+					"disable": "false",
+					"label": "9 AM - 11 AM",
+					"value": "09:00-11:00"
+				},
+				{
+					"disable": "false",
+					"label": "11 AM - 1 PM",
+					"value": "11:00-13:00"
+				},
+				{
+					"disable": "false",
+					"label": "1 PM - 3 PM",
+					"value": "13:00-15:00"
+				},
+				{
+					"disable": "false",
+					"label": "3 PM - 5 PM",
+					"value": "15:00-17:00"
+				},
+				{
+					"disable": "false",
+					"label": "5 PM - 7 PM",
+					"value": "17:00-19:00"
+				}
+			],
+			"label": "Anyday",
+			"value": "-1"
+		},
+		{
+			"availableTimings": [
+				{
+					"disable": true,
+					"label": "9 AM - 11 AM",
+					"value": "09:00-11:00"
+				},
+				{
+					"disable": false,
+					"label": "11 AM - 1 PM",
+					"value": "11:00-13:00"
+				},
+				{
+					"disable": false,
+					"label": "1 PM - 3 PM",
+					"value": "13:00-15:00"
+				},
+				{
+					"disable": false,
+					"label": "3 PM - 5 PM",
+					"value": "15:00-17:00"
+				},
+				{
+					"disable": false,
+					"label": "5 PM - 7 PM",
+					"value": "17:00-19:00"
+				}
+			],
+			"label": "Monday",
+			"value": "2"
+		},
+		{
+			"availableTimings": [
+				{
+					"disable": "false",
+					"label": "9 AM - 11 AM",
+					"value": "09:00-11:00"
+				},
+				{
+					"disable": "false",
+					"label": "11 AM - 1 PM",
+					"value": "11:00-13:00"
+				},
+				{
+					"disable": "false",
+					"label": "1 PM - 3 PM",
+					"value": "13:00-15:00"
+				},
+				{
+					"disable": "false",
+					"label": "3 PM - 5 PM",
+					"value": "15:00-17:00"
+				},
+				{
+					"disable": "false",
+					"label": "5 PM - 7 PM",
+					"value": "17:00-19:00"
+				}
+			],
+			"label": "Tuesday",
+			"value": "3"
+		},
+		{
+			"availableTimings": [
+				{
+					"disable": "false",
+					"label": "9 AM - 11 AM",
+					"value": "09:00-11:00"
+				},
+				{
+					"disable": "false",
+					"label": "11 AM - 1 PM",
+					"value": "11:00-13:00"
+				},
+				{
+					"disable": "false",
+					"label": "1 PM - 3 PM",
+					"value": "13:00-15:00"
+				},
+				{
+					"disable": "false",
+					"label": "3 PM - 5 PM",
+					"value": "15:00-17:00"
+				},
+				{
+					"disable": "false",
+					"label": "5 PM - 7 PM",
+					"value": "17:00-19:00"
+				}
+			],
+			"label": "Wednesday",
+			"value": "4"
+		},
+		{
+			"availableTimings": [
+				{
+					"disable": "false",
+					"label": "9 AM - 11 AM",
+					"value": "09:00-11:00"
+				},
+				{
+					"disable": "false",
+					"label": "11 AM - 1 PM",
+					"value": "11:00-13:00"
+				},
+				{
+					"disable": "false",
+					"label": "1 PM - 3 PM",
+					"value": "13:00-15:00"
+				},
+				{
+					"disable": "false",
+					"label": "3 PM - 5 PM",
+					"value": "15:00-17:00"
+				},
+				{
+					"disable": "false",
+					"label": "5 PM - 7 PM",
+					"value": "17:00-19:00"
+				}
+			],
+			"label": "Thursday",
+			"value": "5"
+		},
+		{
+			"availableTimings": [
+				{
+					"disable": "false",
+					"label": "9 AM - 11 AM",
+					"value": "09:00-11:00"
+				},
+				{
+					"disable": "false",
+					"label": "11 AM - 1 PM",
+					"value": "11:00-13:00"
+				},
+				{
+					"disable": "false",
+					"label": "1 PM - 3 PM",
+					"value": "13:00-15:00"
+				},
+				{
+					"disable": "false",
+					"label": "3 PM - 5 PM",
+					"value": "15:00-17:00"
+				},
+				{
+					"disable": "false",
+					"label": "5 PM - 7 PM",
+					"value": "17:00-19:00"
+				}
+			],
+			"label": "Friday",
+			"value": "6"
+		},
+		{
+			"availableTimings": [
+				{
+					"disable": "false",
+					"label": "9 AM - 11 AM",
+					"value": "09:00-11:00"
+				},
+				{
+					"disable": "false",
+					"label": "11 AM - 1 PM",
+					"value": "11:00-13:00"
+				},
+				{
+					"disable": "false",
+					"label": "1 PM - 3 PM",
+					"value": "13:00-15:00"
+				},
+				{
+					"disable": "false",
+					"label": "3 PM - 5 PM",
+					"value": "15:00-17:00"
+				},
+				{
+					"disable": "false",
+					"label": "5 PM - 7 PM",
+					"value": "17:00-19:00"
+				}
+			],
+			"label": "Saturday",
+			"value": "7"
+		}
+	],
+	"ALERT_DISPLAY_TYPE": "PAGE_IN_POPUP",
+	"redirectionPage": "aa70a6f3-4645-4ebb-9cc1-5cf27a098d83"
+}

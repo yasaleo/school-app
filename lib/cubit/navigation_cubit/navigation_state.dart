@@ -18,3 +18,8 @@ class NavigatedScreens extends NavigationState {
 class NavigationLoading extends NavigationState {
   NavigationLoading();
 }
+
+class NavigationFailure extends NavigationState {
+  final String errorMessage;
+NavigationFailure({required this.errorMessage});
+}

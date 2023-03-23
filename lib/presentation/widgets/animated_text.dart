@@ -53,6 +53,8 @@ class _HomeScreenState extends State<AnimatedText>
       CurvedAnimation(parent: controller, curve: Curves.elasticOut),
     );
 
+  
+
      await Future.delayed(
       const Duration(milliseconds: 100),
     );

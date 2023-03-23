@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:school_app/data_layer/state/app_state.dart';
@@ -12,16 +11,29 @@ part 'navigation_state.dart';
 
 class NavigationCubit extends Cubit<NavigationState> {
   NavigationCubit()
-      : super( NavigationInitial(
+      : super(NavigationInitial(
           initialScreen: const HomeScreen(),
         ));
 
-  navigateTo(PageState st) {
-   
+  navigateTo(PageState st) async {
+    emit(NavigationLoading());
+    _navigation(st);
+  }
+
+  throwFailure()async{
+    emit(NavigationLoading());
+
+    await Future.delayed(const Duration(milliseconds: 700));
+    emit(NavigationFailure(errorMessage: "oops something went too faaaar"));
+    emit(NavigationInitial(initialScreen: const HomeScreen()));
+  }
+
+  Future _navigation(PageState st) async {
+    await Future.delayed(const Duration(milliseconds: 800));
     switch (st) {
       case PageState.classesView:
         emit(NavigatedScreens(screen: ClassesScreen()));
-        
+
         return;
       case PageState.studentsView:
         emit(NavigatedScreens(screen: ClassDetailScreen()));
@@ -31,7 +43,7 @@ class NavigationCubit extends Cubit<NavigationState> {
         return;
       default:
         {
-          emit( NavigatedScreens(screen: const HomeScreen()));
+          emit(NavigatedScreens(screen: const HomeScreen()));
           return;
         }
     }

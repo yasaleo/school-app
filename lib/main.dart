@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school_app/data_layer/services/services.dart';
+import 'package:school_app/data_layer/basic.dart';
 import 'package:school_app/presentation/screens/base_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Services().loadData();
+    
+    CustomDateTime().loadData();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       ),
       home:  BlocProvider(
         create: (context) => NavigationCubit(),
-        child: const BaseScreen(),
+        child:  BaseScreen(),
       ),
     );
   }

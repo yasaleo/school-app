@@ -65,8 +65,8 @@ class HomeScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white, elevation: 10),
                       onPressed: () {
-                        
-                         BlocProvider.of<NavigationCubit>(context).navigateTo(PageState.classesView);
+                        BlocProvider.of<NavigationCubit>(context)
+                            .navigateTo(PageState.classesView);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -89,7 +89,29 @@ class HomeScreen extends StatelessWidget {
                         "Classes",
                         style: style,
                       ),
-                    )
+                    ),
+                    height10,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white, elevation: 10),
+                      onPressed: () {
+                        BlocProvider.of<NavigationCubit>(context)
+                            .throwFailure();
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Error ",
+                            style: TextStyle(color: Colors.green[800]),
+                          ),
+                          const Icon(
+                            Icons.error_outline_outlined,
+                            color: Colors.red,
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 );
               } else {
