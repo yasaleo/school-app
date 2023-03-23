@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    CustomDateTime().loadData();
+ 
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

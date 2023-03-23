@@ -23,7 +23,7 @@ class NavigationCubit extends Cubit<NavigationState> {
   throwFailure()async{
     emit(NavigationLoading());
 
-    await Future.delayed(const Duration(milliseconds: 700));
+    await Future.delayed(const Duration(milliseconds: 200));
     emit(NavigationFailure(errorMessage: "oops something went too faaaar"));
     emit(NavigationInitial(initialScreen: const HomeScreen()));
   }
