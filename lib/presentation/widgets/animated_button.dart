@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -13,28 +14,26 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
     with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
+  bool reverse = false;
   @override
   void initState() {
     initAnimation();
     super.initState();
-   
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-     
       onTapDown: (details) {
-        
-        if (animation.value == 100) {
+        if (animation.value == 100 || reverse) {
           controller.reverse();
-        }else{
+        } else if (!reverse) {
           controller.forward();
         }
       },
-       onTapUp: (details) {
-         controller.stop();
-       },
+      onTapUp: (details) {
+        controller.stop();
+      },
       child: SizedBox(
         child: CustomPaint(
           foregroundPainter: CircleProgress(
@@ -71,9 +70,18 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
     animation = Tween<double>(begin: 0, end: 100).animate(controller)
       ..addListener(() {
         setState(() {});
+
+       reverseLogic();
       });
   }
 
+  void reverseLogic(){
+     if (controller.isCompleted) {
+          reverse = true;
+        } else if (controller.isDismissed) {
+          reverse = false;
+        }
+  }
 }
 
 class CircleProgress extends CustomPainter {
@@ -100,9 +108,9 @@ class CircleProgress extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-      double angle = 2 * pi *(progress/100);
-      canvas.drawArc(Rect.fromCircle(center: center, radius: radius),
-       pi/2, angle, false, animationArc);
+    double angle = 2 * pi * (progress / 100);
+    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), pi / 2,
+        angle, false, animationArc);
   }
 
   @override
