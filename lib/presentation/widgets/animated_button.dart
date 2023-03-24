@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -12,11 +11,12 @@ class CustomAnimatedButton extends StatefulWidget {
 
 class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
     with TickerProviderStateMixin {
-  late Animation<double> circleAnimation;
-  late AnimationController circleController;
+  late Animation<double> _circleAnimation;
+  late AnimationController _circleController;
 
-  late Animation<double> shadowAnimation;
-  late AnimationController shadowController;
+  late Animation<double> _shadowAnimation;
+  late AnimationController _shadowController;
+
   bool reverse = false;
   @override
   void initState() {
@@ -29,22 +29,22 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: (details) {
-        shadowController.forward();
-        if (circleAnimation.value == 100 || reverse) {
-          circleController.reverse();
+        _shadowController.forward();
+        if (_circleAnimation.value == 100 || reverse) {
+          _circleController.reverse();
         } else if (!reverse) {
-          circleController.forward();
+          _circleController.forward();
         }
       },
       onTapUp: (details) {
-        shadowController.reverse();
+        _shadowController.reverse();
 
-        circleController.stop();
+        _circleController.stop();
       },
       child: SizedBox(
         child: CustomPaint(
           foregroundPainter: CircleProgress(
-            progress: circleAnimation.value,
+            progress: _circleAnimation.value,
           ),
           child: Container(
             height: 70,
@@ -54,10 +54,10 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
                 color: Colors.black,
                 boxShadow: [
                   BoxShadow(
-                    blurRadius: shadowAnimation.value,
+                    blurRadius: _shadowAnimation.value,
                     color: Colors.black54,
                     offset: const Offset(0, 0),
-                    spreadRadius: shadowAnimation.value,
+                    spreadRadius: _shadowAnimation.value,
                   )
                 ]),
             child: const Icon(
@@ -72,18 +72,18 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
 
   @override
   void dispose() {
-    circleController.dispose();
-    shadowController.dispose();
+    _circleController.dispose();
+    _shadowController.dispose();
     super.dispose();
   }
 
   void initCircleAnimation() {
-    circleController = AnimationController(
+    _circleController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 2500),
     );
-    circleAnimation =
-        Tween<double>(begin: 0, end: 100).animate(circleController)
+    _circleAnimation =
+        Tween<double>(begin: 0, end: 100).animate(_circleController)
           ..addListener(() {
             setState(() {});
 
@@ -92,14 +92,14 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
   }
 
   void initShadowAnimation() {
-    shadowController = AnimationController(
+    _shadowController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 2000),
       reverseDuration: const Duration(milliseconds: 600),
     );
-    shadowAnimation = Tween<double>(begin: 20, end: 0).animate(
+    _shadowAnimation = Tween<double>(begin: 20, end: 0).animate(
       CurvedAnimation(
-        parent: shadowController,
+        parent: _circleController,
         curve: Curves.slowMiddle,
         reverseCurve: Curves.easeOut,
       ),
@@ -109,9 +109,9 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
   }
 
   void reverseLogic() {
-    if (circleController.isCompleted) {
+    if (_circleController.isCompleted) {
       reverse = true;
-    } else if (circleController.isDismissed) {
+    } else if (_circleController.isDismissed) {
       reverse = false;
     }
   }
@@ -120,13 +120,15 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
 class CircleProgress extends CustomPainter {
   double progress;
 
-  CircleProgress({required this.progress});
+  CircleProgress({
+    required this.progress,
+  });
   @override
   void paint(Canvas canvas, Size size) {
     //    paint circle
     Paint circle = Paint()
       ..strokeWidth = 5
-      ..color = Colors.black12
+      ..color = Colors.black26
       ..style = PaintingStyle.stroke;
 
     Offset center = Offset(size.width / 2, size.height / 2);
@@ -136,7 +138,7 @@ class CircleProgress extends CustomPainter {
 
     // paint arc----------
     Paint animationArc = Paint()
-      ..strokeWidth = 5
+      ..strokeWidth = 7.5
       ..color = Colors.black
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;

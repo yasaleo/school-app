@@ -5,6 +5,7 @@ import 'package:school_app/data_layer/state/app_state.dart';
 import 'package:school_app/presentation/widgets/animated_button.dart';
 
 import 'package:school_app/presentation/widgets/animated_number.dart';
+import 'package:school_app/presentation/widgets/animated_painter_widget.dart';
 import 'package:school_app/presentation/widgets/constants.dart';
 
 import '../../cubit/navigation_cubit/navigation_cubit.dart';
@@ -43,85 +44,96 @@ class HomeScreen extends StatelessWidget {
               if (snapShot.hasData &&
                   snapShot.connectionState == ConnectionState.done) {
                 final schoolDetails = snapShot.requireData;
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.school_outlined,
-                      size: 60,
-                      color: Colors.green,
-                    ),
-                    AnimatedText(
-                      content: schoolDetails.schoolName!,
-                    ),
-                    height10,
-                    const Text(
-                      "Number of Classes",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    const Icon(Icons.arrow_drop_down),
-                    CustomAnimatedNumber(
-                      num: schoolDetails.num0FClasses!,
-                    ),
-                    height10,
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white, elevation: 10),
-                      onPressed: () {
-                        BlocProvider.of<NavigationCubit>(context)
-                            .navigateTo(PageState.classesView);
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "View All ",
-                            style: TextStyle(color: Colors.green[800]),
-                          ),
-                          const Icon(
-                            Icons.arrow_circle_right_outlined,
-                          )
-                        ],
+                return SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.school_outlined,
+                        size: 60,
+                        color: Colors.green,
                       ),
-                    ),
-                    height10,
-                    Hero(
-                      tag: "tag-home",
-                      transitionOnUserGestures: true,
-                      child: Text(
-                        "Classes",
-                        style: style,
+                      AnimatedText(
+                        content: schoolDetails.schoolName!,
                       ),
-                    ),
-                    height10,
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white, elevation: 10),
-                      onPressed: () {
-                        BlocProvider.of<NavigationCubit>(context)
-                            .throwFailure();
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "Error ",
-                            style: TextStyle(color: Colors.green[800]),
-                          ),
-                          const Icon(
-                            Icons.error_outline_outlined,
-                            color: Colors.red,
-                          )
-                        ],
+                      height10,
+                      const Text(
+                        "Number of Classes",
+                        style: TextStyle(fontSize: 18),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 80,
-                    ),
-                    Center(
-                      child: CustomAnimatedButton(),
-                    ),
-                  ],
+                      const Icon(Icons.arrow_drop_down),
+                      CustomAnimatedNumber(
+                        num: schoolDetails.num0FClasses!,
+                      ),
+                      height10,
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white, elevation: 10),
+                        onPressed: () {
+                          BlocProvider.of<NavigationCubit>(context)
+                              .navigateTo(PageState.classesView);
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "View All ",
+                              style: TextStyle(color: Colors.green[800]),
+                            ),
+                            const Icon(
+                              Icons.arrow_circle_right_outlined,
+                            )
+                          ],
+                        ),
+                      ),
+                      height10,
+                      Hero(
+                        tag: "tag-home",
+                        transitionOnUserGestures: true,
+                        child: Text(
+                          "Classes",
+                          style: style,
+                        ),
+                      ),
+                      height10,
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white, elevation: 10),
+                        onPressed: () {
+                          BlocProvider.of<NavigationCubit>(context)
+                              .throwFailure();
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Error ",
+                              style: TextStyle(color: Colors.green[800]),
+                            ),
+                            const Icon(
+                              Icons.error_outline_outlined,
+                              color: Colors.red,
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 80,
+                      ),
+                      const Center(
+                        child: CustomAnimatedButton(),
+                      ),
+                       const SizedBox(
+                        height: 100,
+                      ),
+                      const Center(
+                        child: CustomPainterAnimated(),
+                      ),
+                        const SizedBox(
+                        height: 150,
+                      ),
+                    ],
+                  ),
                 );
               } else {
                 return Center(
