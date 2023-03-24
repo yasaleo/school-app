@@ -124,10 +124,10 @@ class HomeScreen extends StatelessWidget {
                         child: CustomAnimatedButton(),
                       ),
                        const SizedBox(
-                        height: 100,
+                        height: 150,
                       ),
                       const Center(
-                        child: CustomPainterAnimated(),
+                        child: CustomColorPainterAnimated(),
                       ),
                         const SizedBox(
                         height: 150,

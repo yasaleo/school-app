@@ -1,14 +1,14 @@
 
 import 'package:flutter/material.dart';
 
-class CustomPainterAnimated extends StatefulWidget {
-  const CustomPainterAnimated({super.key});
+class CustomColorPainterAnimated extends StatefulWidget {
+  const CustomColorPainterAnimated({super.key});
 
   @override
-  State<CustomPainterAnimated> createState() => _CustomAnimatedButtonState();
+  State<CustomColorPainterAnimated> createState() => _CustomAnimatedButtonState();
 }
 
-class _CustomAnimatedButtonState extends State<CustomPainterAnimated>
+class _CustomAnimatedButtonState extends State<CustomColorPainterAnimated>
     with TickerProviderStateMixin {
   List<Color> colorsList = [
     Colors.red,
@@ -125,10 +125,11 @@ class CircleProgress extends CustomPainter {
     Paint circle = Paint()
       ..strokeWidth = 10
       ..color = col
-      ..style = PaintingStyle.stroke;
+      ..style = PaintingStyle.stroke
+      ..maskFilter= const MaskFilter.blur(BlurStyle.outer, 10);
 
     Offset center = Offset(size.width / 2, size.height / 2);
-    double radius = 75;
+    double radius = 55;
 
     canvas.drawCircle(center, radius, circle);
 
