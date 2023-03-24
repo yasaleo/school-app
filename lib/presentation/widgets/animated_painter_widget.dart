@@ -48,7 +48,7 @@ class _CustomAnimatedButtonState extends State<CustomColorPainterAnimated>
       },
       child: SizedBox(
         child: CustomPaint(
-          painter: CircleProgress(
+          painter: RadiusPainter(
             col: _colorAnimation.value!,
             radi: _radiusAnimation.value,
           ),
@@ -143,11 +143,11 @@ class _CustomAnimatedButtonState extends State<CustomColorPainterAnimated>
   }
 }
 
-class CircleProgress extends CustomPainter {
+class RadiusPainter extends CustomPainter {
   Color col;
   double radi;
 
-  CircleProgress({
+  RadiusPainter({
     required this.col,
     required this.radi,
   });
