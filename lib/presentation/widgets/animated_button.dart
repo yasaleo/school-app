@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -11,13 +11,17 @@ class CustomAnimatedButton extends StatefulWidget {
 }
 
 class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
-    with SingleTickerProviderStateMixin {
-  late Animation<double> animation;
-  late AnimationController controller;
+    with TickerProviderStateMixin {
+  late Animation<double> circleAnimation;
+  late AnimationController circleController;
+
+  late Animation<double> shadowAnimation;
+  late AnimationController shadowController;
   bool reverse = false;
   @override
   void initState() {
-    initAnimation();
+    initCircleAnimation();
+    initShadowAnimation();
     super.initState();
   }
 
@@ -25,30 +29,40 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: (details) {
-        if (animation.value == 100 || reverse) {
-          controller.reverse();
+        shadowController.forward();
+        if (circleAnimation.value == 100 || reverse) {
+          circleController.reverse();
         } else if (!reverse) {
-          controller.forward();
+          circleController.forward();
         }
       },
       onTapUp: (details) {
-        controller.stop();
+        shadowController.reverse();
+
+        circleController.stop();
       },
       child: SizedBox(
         child: CustomPaint(
           foregroundPainter: CircleProgress(
-            progress: animation.value,
+            progress: circleAnimation.value,
           ),
           child: Container(
             height: 70,
             width: 70,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.black,
-            ),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: shadowAnimation.value,
+                    color: Colors.black54,
+                    offset: const Offset(0, 0),
+                    spreadRadius: shadowAnimation.value,
+                  )
+                ]),
             child: const Icon(
               Icons.arrow_forward_ios,
-              color: Colors.white,
+              color: Colors.white54,
             ),
           ),
         ),
@@ -58,29 +72,48 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
 
   @override
   void dispose() {
-    controller.dispose();
+    circleController.dispose();
+    shadowController.dispose();
     super.dispose();
   }
 
-  void initAnimation() {
-    controller = AnimationController(
+  void initCircleAnimation() {
+    circleController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 2500),
     );
-    animation = Tween<double>(begin: 0, end: 100).animate(controller)
-      ..addListener(() {
-        setState(() {});
+    circleAnimation =
+        Tween<double>(begin: 0, end: 100).animate(circleController)
+          ..addListener(() {
+            setState(() {});
 
-       reverseLogic();
+            reverseLogic();
+          });
+  }
+
+  void initShadowAnimation() {
+    shadowController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+      reverseDuration: const Duration(milliseconds: 600),
+    );
+    shadowAnimation = Tween<double>(begin: 20, end: 0).animate(
+      CurvedAnimation(
+        parent: shadowController,
+        curve: Curves.slowMiddle,
+        reverseCurve: Curves.easeOut,
+      ),
+    )..addListener(() {
+        setState(() {});
       });
   }
 
-  void reverseLogic(){
-     if (controller.isCompleted) {
-          reverse = true;
-        } else if (controller.isDismissed) {
-          reverse = false;
-        }
+  void reverseLogic() {
+    if (circleController.isCompleted) {
+      reverse = true;
+    } else if (circleController.isDismissed) {
+      reverse = false;
+    }
   }
 }
 
