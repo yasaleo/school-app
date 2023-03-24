@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/data_layer/services/services.dart';
 import 'package:school_app/data_layer/state/app_state.dart';
+import 'package:school_app/presentation/widgets/animated_button.dart';
 
 import 'package:school_app/presentation/widgets/animated_number.dart';
 import 'package:school_app/presentation/widgets/constants.dart';
@@ -113,6 +114,12 @@ class HomeScreen extends StatelessWidget {
                           )
                         ],
                       ),
+                    ),
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    Center(
+                      child: CustomAnimatedButton(),
                     ),
                   ],
                 );

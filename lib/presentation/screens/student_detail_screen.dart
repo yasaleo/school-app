@@ -158,7 +158,7 @@ class _BasicDetail extends StatelessWidget {
                   width: 25,
                 ),
                 Hero(
-                  tag: 'studentnameindex',
+                  tag: 'studentname${AppState.index}',
                   child: Text(
                     studentDetail.name!,
                     style: Theme.of(context).textTheme.headline5,

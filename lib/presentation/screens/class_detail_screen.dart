@@ -138,6 +138,7 @@ class StudentCard extends StatelessWidget {
           
            BlocProvider.of<NavigationCubit>(context).navigateTo(PageState.studentDetailView);
           AppState.studentDetail = studentDetail;
+          AppState.index =index;
         },
         splashColor: Colors.green,
         radius: 500,
@@ -195,7 +196,7 @@ class StudentCard extends StatelessWidget {
                         width: 10,
                       ),
                       Hero(
-                        tag: 'studentname$index',
+                        tag: 'studentname${AppState.index}',
                         child: Text(
                           studentDetail.name!,
                           style: Theme.of(context).textTheme.headline5,

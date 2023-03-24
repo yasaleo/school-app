@@ -14,8 +14,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
- 
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -25,9 +23,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.green,
       ),
-      home:  BlocProvider(
+      home: BlocProvider(
         create: (context) => NavigationCubit(),
-        child:  BaseScreen(),
+        child: BaseScreen(),
       ),
     );
   }

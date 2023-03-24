@@ -10,5 +10,7 @@ class AppState {
 
   static  DetailsOfClass? classDetail;
   static StudentsDetail? studentDetail;
+
+  static int? index;
   
 }

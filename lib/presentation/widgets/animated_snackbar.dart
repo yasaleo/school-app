@@ -65,7 +65,7 @@ class _AnimatedSnackbarState extends State<AnimatedSnackbar>
             setState(() {
               if (controller.isDismissed) {
                 if (reeatedTimes != 2) {
-                  reeatedTimes = ++reeatedTimes;
+                  reeatedTimes++;
 
                   repeat();
                 }

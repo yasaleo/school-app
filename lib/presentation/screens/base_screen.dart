@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/presentation/widgets/animated_snackbar.dart';
-
 import '../../cubit/navigation_cubit/navigation_cubit.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -27,6 +26,7 @@ class _BaseScreenState extends State<BaseScreen>
               content: AnimatedSnackbar(),
               backgroundColor: Colors.transparent,
               behavior: SnackBarBehavior.floating,
+              clipBehavior: Clip.none,
               duration: Duration(milliseconds: 2000),
             ),
           );
