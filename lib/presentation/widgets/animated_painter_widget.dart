@@ -10,8 +10,8 @@ class CustomColorPainterAnimated extends StatefulWidget {
 
 class _CustomAnimatedButtonState extends State<CustomColorPainterAnimated>
     with TickerProviderStateMixin {
-  List<Color> colorsList = [
-    Colors.red,
+  List<Color?> colorsList = [
+    Colors.red[800],
     Colors.yellow,
     Colors.cyan,
     Colors.green,
@@ -126,10 +126,10 @@ class CircleProgress extends CustomPainter {
       ..strokeWidth = 10
       ..color = col
       ..style = PaintingStyle.stroke
-      ..maskFilter= const MaskFilter.blur(BlurStyle.outer, 10);
+      ..maskFilter= const MaskFilter.blur(BlurStyle.normal, 15);
 
     Offset center = Offset(size.width / 2, size.height / 2);
-    double radius = 55;
+    double radius = 70;
 
     canvas.drawCircle(center, radius, circle);
 
