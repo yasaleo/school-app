@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/cubit/navigation_cubit/navigation_cubit.dart';
 import 'package:school_app/data_layer/model/schooll_model.dart';
-import 'package:school_app/data_layer/state/app_state.dart';
+import 'package:school_app/data_layer/appstateconstants/app_state.dart';
 import 'package:school_app/presentation/screens/class_detail_screen.dart';
 
 import 'constants.dart';

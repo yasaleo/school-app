@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/data_layer/services/services.dart';
-import 'package:school_app/data_layer/state/app_state.dart';
+import 'package:school_app/data_layer/appstateconstants/app_state.dart';
 import 'package:school_app/presentation/screens/testScreen.dart';
 import 'package:school_app/presentation/screens/transform_text_screen.dart';
 import 'package:school_app/presentation/widgets/animated_button.dart';

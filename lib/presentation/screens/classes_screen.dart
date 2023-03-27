@@ -4,7 +4,7 @@ import 'package:school_app/data_layer/model/schooll_model.dart';
 import 'package:school_app/data_layer/services/services.dart';
 
 import '../../cubit/navigation_cubit/navigation_cubit.dart';
-import '../../data_layer/state/app_state.dart';
+import '../../data_layer/appstateconstants/app_state.dart';
 import '../widgets/class_card.dart';
 
 class ClassesScreen extends StatelessWidget {

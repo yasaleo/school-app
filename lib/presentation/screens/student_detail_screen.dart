@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:school_app/data_layer/state/app_state.dart';
+import 'package:school_app/data_layer/appstateconstants/app_state.dart';
 import 'package:school_app/presentation/widgets/constants.dart';
 
 import '../../cubit/navigation_cubit/navigation_cubit.dart';

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:school_app/data_layer/state/app_state.dart';
+import 'package:school_app/data_layer/appstateconstants/app_state.dart';
 import 'package:school_app/presentation/screens/home_screen.dart';
 
 import '../../presentation/screens/class_detail_screen.dart';

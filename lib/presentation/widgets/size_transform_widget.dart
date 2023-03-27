@@ -26,14 +26,15 @@ class _AnimatedSizeTransformWidgetState extends State<CustomAnimatedSizeWidget>
   @override
   void initState() {
     initializeSizeAnimation();
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final deSize = MediaQuery.of(context).size;
+    
     return GestureDetector(
-      onTapUp: (tapUpDetails) =>_ontap(),
+      onTapUp: (tapUpDetails) => _ontap(),
       child: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
@@ -53,7 +54,7 @@ class _AnimatedSizeTransformWidgetState extends State<CustomAnimatedSizeWidget>
   void _ontap() async {
     await Future.delayed(const Duration(milliseconds: 150));
     _controller.forward();
-    navigation();
+    
   }
 
   void initializeSizeAnimation() {
@@ -85,10 +86,18 @@ class _AnimatedSizeTransformWidgetState extends State<CustomAnimatedSizeWidget>
         curve: Curves.linearToEaseOut,
       ),
     );
+    _controller.addListener(() { 
+      if (_controller.isCompleted) {
+        navigation();
+      }
+        
+      
+      
+    });
   }
 
-  void navigation() async {
-    await Future.delayed(const Duration(milliseconds: 4020));
+  void navigation()  {
+    
     if (mounted) {
       Navigator.of(context).pushReplacement(
           CustomPageTransition().customFadeRoute(page: const TestScreen()));
@@ -97,9 +106,9 @@ class _AnimatedSizeTransformWidgetState extends State<CustomAnimatedSizeWidget>
 
   @override
   void dispose() {
+
     _controller.dispose();
+    
     super.dispose();
   }
 }
-
-
