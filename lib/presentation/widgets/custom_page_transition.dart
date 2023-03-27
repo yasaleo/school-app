@@ -27,8 +27,8 @@ class CustomPageTransition {
           parent: animation,
           curve: Curves.fastLinearToSlowEaseIn,
         );
-        return FadeTransition(
-          opacity: scaleAnimation ,
+        return ScaleTransition(
+          scale: scaleAnimation ,
           child: child,
         );
       },
