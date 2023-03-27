@@ -44,7 +44,7 @@ class ClassDetailScreen extends StatelessWidget {
           } else {
             return StudentCard(
               studentDetail: classDetail.studentsDetails![index - 1],
-              index: index,
+             
             );
           }
         },
@@ -120,11 +120,11 @@ class StudentCard extends StatelessWidget {
   StudentCard({
     Key? key,
     required this.studentDetail,
-    required this.index,
+    
   }) : super(key: key);
 
   StudentsDetail studentDetail;
-  final int index;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +138,7 @@ class StudentCard extends StatelessWidget {
           
            BlocProvider.of<NavigationCubit>(context).navigateTo(PageState.studentDetailView);
           AppState.studentDetail = studentDetail;
-          AppState.index =index;
+          
         },
         splashColor: Colors.green,
         radius: 500,
@@ -166,12 +166,9 @@ class StudentCard extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Hero(
-                        tag: 'studentrollnum$index',
-                        child: Text(
-                          studentDetail.rollNum.toString(),
-                          style: Theme.of(context).textTheme.headline5,
-                        ),
+                      Text(
+                        studentDetail.rollNum.toString(),
+                        style: Theme.of(context).textTheme.headline5,
                       )
                     ],
                   ),
@@ -195,12 +192,9 @@ class StudentCard extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Hero(
-                        tag: 'studentname${AppState.index}',
-                        child: Text(
-                          studentDetail.name!,
-                          style: Theme.of(context).textTheme.headline5,
-                        ),
+                      Text(
+                        studentDetail.name!,
+                        style: Theme.of(context).textTheme.headline5,
                       )
                     ],
                   ),

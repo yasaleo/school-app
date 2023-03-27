@@ -97,7 +97,9 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
       duration: const Duration(milliseconds: 2000),
       reverseDuration: const Duration(milliseconds: 600),
     );
-    _shadowAnimation = Tween<double>(begin: 20, end: 0).animate(
+    final _shadowTween = Tween<double>(begin: 20, end: 0);
+    
+    _shadowAnimation = _shadowTween.animate(
       CurvedAnimation(
         parent: _circleController,
         curve: Curves.slowMiddle,

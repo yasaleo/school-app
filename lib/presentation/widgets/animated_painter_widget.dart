@@ -1,6 +1,7 @@
-import 'dart:developer';
+
 
 import 'package:flutter/material.dart';
+
 
 class CustomColorPainterAnimated extends StatefulWidget {
   const CustomColorPainterAnimated({super.key});
@@ -27,6 +28,8 @@ class _CustomAnimatedButtonState extends State<CustomColorPainterAnimated>
 
   late Animation<double> _radiusAnimation;
   late AnimationController _radiusController;
+
+  
 
   bool reverse = false;
   @override
@@ -85,8 +88,12 @@ class _CustomAnimatedButtonState extends State<CustomColorPainterAnimated>
     _colorAnimation = ColorTween(
       begin: colorsList[colorIndex],
       end: colorsList[colorIndex + 1],
-    ).animate(_colorController)
-      ..addListener(() {
+    ).animate(
+      CurvedAnimation(
+        parent: _colorController,
+        curve: Curves.easeInOut,
+      ),
+    )..addListener(() {
         setState(() {});
 
         reverseLogic();
@@ -117,7 +124,7 @@ class _CustomAnimatedButtonState extends State<CustomColorPainterAnimated>
     ).animate(
       CurvedAnimation(
         parent: _radiusController,
-        curve: Curves.elasticInOut,
+        curve: Curves.elasticOut,
         reverseCurve: Curves.easeInOutCubicEmphasized,
       ),
     )
@@ -130,7 +137,7 @@ class _CustomAnimatedButtonState extends State<CustomColorPainterAnimated>
             _radiusController.reverse();
           } else if (status == AnimationStatus.dismissed) {
             await Future.delayed(
-              const Duration(milliseconds: 800),
+              const Duration(milliseconds: 600),
             );
             _radiusController.forward();
           }
@@ -158,7 +165,7 @@ class RadiusPainter extends CustomPainter {
       ..strokeWidth = 25
       ..color = col
       ..style = PaintingStyle.stroke
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 35);
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 30);
 
     Offset center = Offset(size.width / 2, size.height / 2);
     double radius = 70;

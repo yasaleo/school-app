@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/data_layer/services/services.dart';
 import 'package:school_app/data_layer/state/app_state.dart';
+import 'package:school_app/presentation/screens/testScreen.dart';
+import 'package:school_app/presentation/screens/transform_text_screen.dart';
 import 'package:school_app/presentation/widgets/animated_button.dart';
-
 import 'package:school_app/presentation/widgets/animated_number.dart';
 import 'package:school_app/presentation/widgets/animated_painter_widget.dart';
 import 'package:school_app/presentation/widgets/constants.dart';
-
 import '../../cubit/navigation_cubit/navigation_cubit.dart';
 import '../../data_layer/model/schooll_model.dart';
 import '../widgets/animated_text.dart';
+import '../widgets/custom_page_transition.dart';
 
 class HomeScreen extends StatelessWidget {
-   HomeScreen({super.key});
-   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  HomeScreen({super.key});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -123,13 +124,39 @@ class HomeScreen extends StatelessWidget {
                       const Center(
                         child: CustomAnimatedButton(),
                       ),
-                       const SizedBox(
+                      const SizedBox(
                         height: 150,
                       ),
                       const Center(
                         child: CustomColorPainterAnimated(),
                       ),
-                        const SizedBox(
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const TransformTextScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text("Animated Text"),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            CustomPageTransition().customScaleRoute(
+                              page: const TestScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text("Test Screen"),
+                      ),
+                      const SizedBox(
                         height: 150,
                       ),
                     ],
