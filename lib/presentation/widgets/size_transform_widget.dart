@@ -65,7 +65,7 @@ class _AnimatedSizeTransformWidgetState extends State<CustomAnimatedSizeWidget>
 
     final _sizeTween = Tween<double>(
       begin: 1,
-      end: 450,
+      end: 150,
     );
 
     _sizeAnimation = _sizeTween.animate(

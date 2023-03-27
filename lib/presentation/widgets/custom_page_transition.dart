@@ -1,17 +1,16 @@
+
+
 import 'package:flutter/material.dart';
 
 class CustomPageTransition {
   Route customFadeRoute({required Widget page}) {
     return PageRouteBuilder(
       barrierColor: Colors.transparent,
-      transitionDuration: const Duration(milliseconds: 500),
+      transitionDuration: const Duration(milliseconds: 800),
       reverseTransitionDuration: const Duration(milliseconds: 350),
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
+        return FadeTransition(opacity: animation, child: child);
       },
     );
   }
@@ -28,7 +27,7 @@ class CustomPageTransition {
           curve: Curves.fastLinearToSlowEaseIn,
         );
         return ScaleTransition(
-          scale: scaleAnimation ,
+          scale: scaleAnimation,
           child: child,
         );
       },
