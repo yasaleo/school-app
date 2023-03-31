@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/data_layer/services/services.dart';
 import 'package:school_app/data_layer/appstateconstants/app_state.dart';
+import 'package:school_app/presentation/screens/slide_animation.dart';
 import 'package:school_app/presentation/screens/testScreen.dart';
 import 'package:school_app/presentation/screens/transform_text_screen.dart';
 import 'package:school_app/presentation/widgets/animated_button.dart';
@@ -155,6 +156,19 @@ class HomeScreen extends StatelessWidget {
                           );
                         },
                         child: const Text("Test Screen"),
+                      ),
+                       const SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            CustomPageTransition().customFadeRoute(
+                              page: const SlidableAnimationScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text("Slidable animation"),
                       ),
                       const SizedBox(
                         height: 150,

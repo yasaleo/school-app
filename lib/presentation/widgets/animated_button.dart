@@ -43,6 +43,7 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
       },
       child: SizedBox(
         child: CustomPaint(
+          
           foregroundPainter: CircleProgress(
             progress: _circleAnimation.value,
           ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:school_app/data_layer/appstateconstants/app_state.dart';
@@ -12,20 +14,27 @@ part 'navigation_state.dart';
 class NavigationCubit extends Cubit<NavigationState> {
   NavigationCubit()
       : super(NavigationInitial(
-          initialScreen:  HomeScreen(),
+          initialScreen: HomeScreen(),
         ));
 
   navigateTo(PageState st) async {
-    emit(NavigationLoading());
-    _navigation(st);
+    Random r = Random();
+    bool result = r.nextDouble() <= 0.7;
+
+    if (result) {
+      emit(NavigationLoading());
+      _navigation(st); 
+    } else {
+      throwFailure();
+    }
   }
 
-  throwFailure()async{
+  throwFailure() async {
     emit(NavigationLoading());
 
     await Future.delayed(const Duration(milliseconds: 500));
     emit(NavigationFailure(errorMessage: "oops something went too faaaar"));
-    emit(NavigationInitial(initialScreen:  HomeScreen()));
+    emit(NavigationInitial(initialScreen: HomeScreen()));
   }
 
   Future _navigation(PageState st) async {
@@ -43,7 +52,7 @@ class NavigationCubit extends Cubit<NavigationState> {
         return;
       default:
         {
-          emit(NavigatedScreens(screen:  HomeScreen()));
+          emit(NavigatedScreens(screen: HomeScreen()));
           return;
         }
     }
