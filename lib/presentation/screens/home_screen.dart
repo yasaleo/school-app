@@ -170,6 +170,7 @@ class HomeScreen extends StatelessWidget {
                         },
                         child: const Text("Slidable animation"),
                       ),
+                  
                       const SizedBox(
                         height: 150,
                       ),
