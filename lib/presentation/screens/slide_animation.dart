@@ -1,6 +1,20 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+List songDetails = [
+  'Moon River',
+  'Summer Love',
+  'Midnight Sun',
+  'Ocean Blue',
+  'Thunder Road',
+  'Golden Days',
+  'Wild Heart',
+  'Crystal Sky',
+  'Electric Dreams',
+  'Silent Storm',
+];
 
 class SlidableAnimationScreen extends StatefulWidget {
   const SlidableAnimationScreen({super.key});
@@ -33,49 +47,11 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
       body: Center(
         child: Column(
           children: [
-            SizedBox(
-                height: 50,
-                width: 100,
-                child: PageView.builder(
-                  pageSnapping: true,
-                  itemCount: 15,
-                  itemBuilder: (context, index) {
-                    return Text(
-                      "Hello $index",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color:
-                            index % 2 == 0 ? Colors.green : Colors.deepPurple,
-                      ),
-                    );
-                  },
-                )
-
-                // ListView.builder(
-                //   physics: ClampingScrollPhysics(),
-                //   controller: scontroller,
-                //   scrollDirection: Axis.horizontal,
-                //   itemCount: 15,
-
-                //   itemBuilder: (BuildContext context, int index) {
-                //      return Padding(
-                //        padding: const EdgeInsets.all(2),
-                //        child: FittedBox(
-                //          child: Text(
-                //           "Hello $index",
-                //           style: TextStyle(
-                //             fontSize: 25,
-                //             fontWeight: FontWeight.bold,
-                //             color: index % 2 == 0 ? Colors.green : Colors.deepPurple,
-                //           ),
-                //                      ),
-                //        ),
-                //      );
-                //   },
-                // ),
-                ),
-                   AnimatedSwitcher(
+            _CustomSlidable(),
+            const SizedBox(
+              height: 100,
+            ),
+            AnimatedSwitcher(
               duration: const Duration(milliseconds: 600),
               child: Container(
                 key: UniqueKey(),
@@ -83,6 +59,10 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
                 width: 100,
                 color: colorsList[indexx],
               ),
+            ),
+            SizedBox(
+              height: 200,
+              child: Text(songDetails[0]),
             )
           ],
         ),
@@ -116,6 +96,57 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _CustomSlidable extends StatelessWidget {
+  _CustomSlidable({
+    Key? key,
+  }) : super(key: key);
+
+  PageController controller = PageController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 65,
+      width: 280,
+      decoration: BoxDecoration(
+        color: Colors.redAccent,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Center(
+        child: SizedBox(
+          // height: 50,
+          // width: 180,
+          child: PageView.builder(
+            onPageChanged: (value) {
+           
+              
+            },
+            controller: controller,
+            pageSnapping: true,
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return SizedBox(
+                height: 50,
+                width: 180,
+                child: Center(
+                  child: Text(
+                    songDetails[index],
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: index % 2 == 0 ? Colors.green : Colors.deepPurple,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
