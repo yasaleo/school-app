@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 List _songDetails = [
@@ -51,7 +48,7 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
       body: Center(
         child: Column(
           children: [
-            _CustomSlidable(),
+            const _CustomSlidable(),
             const SizedBox(
               height: 100,
             ),
@@ -69,7 +66,13 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
                 builder: (BuildContext ctx, int index, _) {
                   return SizedBox(
                     height: 200,
-                    child: Text(_songDetails[index]),
+                    child: Text(
+                      _songDetails[index],
+                      style: const TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   );
                 })
           ],
@@ -86,7 +89,8 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
               // });
 
               _controller.previousPage(
-                  duration: const Duration(milliseconds: 1000), curve: Curves.elasticOut);
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.elasticOut);
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -98,7 +102,8 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
           FloatingActionButton(
             onPressed: () {
               _controller.nextPage(
-                  duration: const Duration(milliseconds: 1000), curve: Curves.elasticOut);
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.elasticOut);
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -113,7 +118,7 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
   }
 }
 
-class _CustomSlidable extends StatelessWidget {
+class _CustomSlidable extends StatelessWidget  {
   const _CustomSlidable({
     Key? key,
   }) : super(key: key);
