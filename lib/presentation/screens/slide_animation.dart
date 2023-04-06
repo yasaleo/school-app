@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-List songDetails = [
+List _songDetails = [
   'Moon River',
   'Summer Love',
   'Midnight Sun',
@@ -15,6 +15,10 @@ List songDetails = [
   'Electric Dreams',
   'Silent Storm',
 ];
+
+ValueNotifier<int> _indexx = ValueNotifier(0);
+
+PageController _controller = PageController();
 
 class SlidableAnimationScreen extends StatefulWidget {
   const SlidableAnimationScreen({super.key});
@@ -60,10 +64,14 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
                 color: colorsList[indexx],
               ),
             ),
-            SizedBox(
-              height: 200,
-              child: Text(songDetails[0]),
-            )
+            ValueListenableBuilder(
+                valueListenable: _indexx,
+                builder: (BuildContext ctx, int index, _) {
+                  return SizedBox(
+                    height: 200,
+                    child: Text(_songDetails[index]),
+                  );
+                })
           ],
         ),
       ),
@@ -72,10 +80,13 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
         children: [
           FloatingActionButton(
             onPressed: () {
-              setState(() {
-                indexx++;
-                if (indexx == colorsList.length) indexx = 0;
-              });
+              // setState(() {
+              //   indexx++;
+              //   if (indexx == colorsList.length) indexx = 0;
+              // });
+
+              _controller.previousPage(
+                  duration: const Duration(milliseconds: 1000), curve: Curves.elasticOut);
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -86,7 +97,8 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
           ),
           FloatingActionButton(
             onPressed: () {
-              colorsList.shuffle();
+              _controller.nextPage(
+                  duration: const Duration(milliseconds: 1000), curve: Curves.elasticOut);
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -102,11 +114,9 @@ class _SlideAnimationState extends State<SlidableAnimationScreen> {
 }
 
 class _CustomSlidable extends StatelessWidget {
-  _CustomSlidable({
+  const _CustomSlidable({
     Key? key,
   }) : super(key: key);
-
-  PageController controller = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -123,10 +133,9 @@ class _CustomSlidable extends StatelessWidget {
           // width: 180,
           child: PageView.builder(
             onPageChanged: (value) {
-           
-              
+              _indexx.value = value;
             },
-            controller: controller,
+            controller: _controller,
             pageSnapping: true,
             itemCount: 10,
             itemBuilder: (context, index) {
@@ -135,7 +144,7 @@ class _CustomSlidable extends StatelessWidget {
                 width: 180,
                 child: Center(
                   child: Text(
-                    songDetails[index],
+                    _songDetails[index],
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
