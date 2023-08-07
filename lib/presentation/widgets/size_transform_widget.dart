@@ -63,24 +63,24 @@ class _AnimatedSizeTransformWidgetState extends State<CustomAnimatedSizeWidget>
       duration: const Duration(milliseconds: 4000),
     );
 
-    final _sizeTween = Tween<double>(
+    final sizeTween = Tween<double>(
       begin: 1,
       end: 150,
     );
 
-    _sizeAnimation = _sizeTween.animate(
+    _sizeAnimation = sizeTween.animate(
       CurvedAnimation(
         parent: _controller,
         curve: Curves.easeInCubic,
       ),
     );
 
-    final _angleTween = Tween<double>(
+    final angleTween = Tween<double>(
       begin: 0,
       end: 180,
     );
 
-    _angleAnimation = _angleTween.animate(
+    _angleAnimation = angleTween.animate(
       CurvedAnimation(
         parent: _controller,
         curve: Curves.linearToEaseOut,

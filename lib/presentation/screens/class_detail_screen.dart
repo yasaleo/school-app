@@ -74,11 +74,11 @@ class ClassDetailScreen extends StatelessWidget {
                     children: [
                       Text(
                         "Class teacher : ",
-                        style: Theme.of(context).textTheme.bodyText2,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Text(
                         classDetail.classTeacher!,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ],
                   ),
@@ -87,11 +87,11 @@ class ClassDetailScreen extends StatelessWidget {
                     children: [
                       Text(
                         "Number of Students : ",
-                        style: Theme.of(context).textTheme.bodyText2,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Text(
                         classDetail.totalnumberOfStudents.toString(),
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ],
                   ),
@@ -100,9 +100,9 @@ class ClassDetailScreen extends StatelessWidget {
             ),
           ),
           height10,
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
+            children: [
               Text("List of Students"),
               Icon(
                 Icons.arrow_downward_rounded,
@@ -161,14 +161,14 @@ class StudentCard extends StatelessWidget {
                     children: [
                       Text(
                         "Roll no:",
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       Text(
                         studentDetail.rollNum.toString(),
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       )
                     ],
                   ),
@@ -187,14 +187,14 @@ class StudentCard extends StatelessWidget {
                     children: [
                       Text(
                         "Name:",
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       Text(
                         studentDetail.name!,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       )
                     ],
                   ),

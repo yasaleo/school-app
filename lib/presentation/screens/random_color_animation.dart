@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class ColorAnimationScreen extends StatefulWidget {
+  const ColorAnimationScreen({super.key});
+
   @override
   _ColorAnimationScreenState createState() => _ColorAnimationScreenState();
 }
@@ -24,21 +26,21 @@ class _ColorAnimationScreenState extends State<ColorAnimationScreen>
     // Create an animation controller
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
     );
 
     // Define a list of tweens to animate between random colors
-    List<ColorTween> _colorTweens = [];
+    List<ColorTween> colorTweens = [];
     for (int i = 0; i < _colors.length - 1; i++) {
-      _colorTweens.add(ColorTween(begin: _colors[i], end: _colors[i + 1]));
+      colorTweens.add(ColorTween(begin: _colors[i], end: _colors[i + 1]));
     }
 
     //
 
     tweenSequenceItems = List<TweenSequenceItem<Color?>>.generate(
-      _colorTweens.length - 1,
+      colorTweens.length - 1,
       (int index) => TweenSequenceItem<Color?>(
-        tween: _colorTweens[index],
+        tween: colorTweens[index],
         weight: 1.0,
       ),
     );
@@ -62,7 +64,7 @@ class _ColorAnimationScreenState extends State<ColorAnimationScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Color Animation')),
+      appBar: AppBar(title: const Text('Color Animation')),
       body: Center(
         child: Container(
           width: 200,
@@ -81,9 +83,9 @@ class _ColorAnimationScreenState extends State<ColorAnimationScreen>
                       Colors.accents[Random().nextInt(Colors.accents.length)]);
 
               // Define a new list of tweens to animate between the new colors
-              List<ColorTween> _colorTweens = [];
+              List<ColorTween> colorTweens = [];
               for (int i = 0; i < _colors.length - 1; i++) {
-                _colorTweens
+                colorTweens
                     .add(ColorTween(begin: _colors[i], end: _colors[i + 1]));
               }
 
@@ -96,7 +98,7 @@ class _ColorAnimationScreenState extends State<ColorAnimationScreen>
               _controller.forward();
               // _controller.repeat(reverse: true);
             },
-            child: Text('Change Color'),
+            child: const Text('Change Color'),
           ),
         ),
       ),

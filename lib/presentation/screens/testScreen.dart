@@ -10,7 +10,7 @@ class TestScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.purple[300],
       appBar: AppBar(
-        title: Text("Home"),
+        title: const Text("Home"),
         backgroundColor: Colors.transparent,
       ),
       body: ListView.builder(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_app/data_layer/services/services.dart';
 import 'package:school_app/data_layer/appstateconstants/app_state.dart';
+import 'package:school_app/presentation/screens/fingress_logo.dart';
 import 'package:school_app/presentation/screens/random_color_animation.dart';
 import 'package:school_app/presentation/screens/slide_animation.dart';
 import 'package:school_app/presentation/screens/testScreen.dart';
@@ -14,6 +15,7 @@ import '../../cubit/navigation_cubit/navigation_cubit.dart';
 import '../../data_layer/model/schooll_model.dart';
 import '../widgets/animated_text.dart';
 import '../widgets/custom_page_transition.dart';
+import 'login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -178,17 +180,43 @@ class HomeScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(
                             CustomPageTransition().customFadeRoute(
-                              page:  ColorAnimationScreen(),
+                              page:  const ColorAnimationScreen(),
                             ),
                           );
                         },
                         child: const Text("ColorAnimationScreen"),
                       ),
                   
+                    
+                         const SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            CustomPageTransition().customFadeRoute(
+                              page: const LoginScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text("Login Screen"),
+                      ),
+                         const SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            CustomPageTransition().customFadeRoute(
+                              page: const FingressLogoScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text("FingressLogoScreen"),
+                      ),
                       const SizedBox(
                         height: 150,
                       ),
-                      
                     ],
                   ),
                 );

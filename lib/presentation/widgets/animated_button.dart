@@ -42,8 +42,7 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
         _circleController.stop();
       },
       child: SizedBox(
-        child: CustomPaint(
-          
+        child: CustomPaint(          
           foregroundPainter: CircleProgress(
             progress: _circleAnimation.value,
           ),
@@ -98,9 +97,9 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
       duration: const Duration(milliseconds: 2000),
       reverseDuration: const Duration(milliseconds: 600),
     );
-    final _shadowTween = Tween<double>(begin: 20, end: 0);
+    final shadowTween = Tween<double>(begin: 20, end: 0);
     
-    _shadowAnimation = _shadowTween.animate(
+    _shadowAnimation = shadowTween.animate(
       CurvedAnimation(
         parent: _circleController,
         curve: Curves.slowMiddle,

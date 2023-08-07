@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomAnimatedShadowButton extends StatefulWidget {
-  CustomAnimatedShadowButton({
-    Key? key,
+  CustomAnimatedShadowButton({super.key, 
+    // Key? key,
     required this.content,
   });
   String content;

@@ -152,7 +152,7 @@ class _BasicDetail extends StatelessWidget {
               children: [
                 Text(
                   'Student Name :',
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(
                   width: 25,
@@ -161,7 +161,7 @@ class _BasicDetail extends StatelessWidget {
                   tag: 'studentname${AppState.index}',
                   child: Text(
                     studentDetail.name!,
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
                 const Spacer()
@@ -173,7 +173,7 @@ class _BasicDetail extends StatelessWidget {
               children: [
                 Text(
                   'Roll no :',
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(
                   width: 75,
@@ -182,7 +182,7 @@ class _BasicDetail extends StatelessWidget {
                   tag: 'studentrollnumindex',
                   child: Text(
                     studentDetail.rollNum.toString(),
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
                 const Spacer()
@@ -194,14 +194,14 @@ class _BasicDetail extends StatelessWidget {
               children: [
                 Text(
                   'Place :',
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(
                   width: 85,
                 ),
                 Text(
                   studentDetail.place!,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const Spacer()
               ],

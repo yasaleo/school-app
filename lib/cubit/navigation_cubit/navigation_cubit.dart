@@ -23,7 +23,7 @@ class NavigationCubit extends Cubit<NavigationState> {
 
     if (result) {
       emit(NavigationLoading());
-      _navigation(st); 
+      _navigation(st);
     } else {
       throwFailure();
     }
