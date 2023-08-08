@@ -11,7 +11,11 @@ class FingressLogoScreen extends StatefulWidget {
 
 class _FingressLogoScreenState extends State<FingressLogoScreen>
     with TickerProviderStateMixin {
-  late Animation<double> drwaAnimation;
+  late Animation<double> drawBlueLineAnimation;
+  late Animation<double> drawGreenLineAnimation;
+  late Animation<double> drawGreenHeightAnimation;
+
+
   late AnimationController controller;
   @override
   void initState() {
@@ -45,7 +49,9 @@ class _FingressLogoScreenState extends State<FingressLogoScreen>
                     ),
                     child: CustomPaint(
                       foregroundPainter: FingressLogoPainter(
-                          animatedValue: drwaAnimation.value),
+                          blueLineAnimation: drawBlueLineAnimation.value,
+                          greenLineAnimation: drawGreenLineAnimation.value,
+                          greenLineHeightAnimation: drawGreenHeightAnimation.value),
                     ),
                   ),
                 ),
@@ -62,13 +68,33 @@ class _FingressLogoScreenState extends State<FingressLogoScreen>
       vsync: this,
       duration: const Duration(milliseconds: 800),
     );
-    drwaAnimation = Tween(
-      begin: 0.0,
+    drawBlueLineAnimation = Tween(
+      begin: 0.50,
       end: 1.0,
-    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeInOutCubicEmphasized));
+    ).animate(CurvedAnimation(
+        parent: controller, curve: Curves.easeInOutCubicEmphasized));
+
+    drawGreenLineAnimation = Tween(
+      begin: 1.95,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+        parent: controller, curve: Curves.easeInOutCubicEmphasized));
+    drawGreenHeightAnimation = Tween(
+      begin: .50,
+      end: 0.0,
+    ).animate(CurvedAnimation(
+        parent: controller, curve: Curves.easeInOutCubicEmphasized));
 
     controller.addListener(() {
       setState(() {});
+    });
+    controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        controller.reverse();
+      }
+      if (status == AnimationStatus.dismissed) {
+        controller.forward();
+      }
     });
     await Future.delayed(const Duration(seconds: 1));
     controller.forward();
@@ -76,8 +102,17 @@ class _FingressLogoScreenState extends State<FingressLogoScreen>
 }
 
 class FingressLogoPainter extends CustomPainter {
-  FingressLogoPainter({required this.animatedValue});
-  final double animatedValue;
+  FingressLogoPainter({
+    required this.blueLineAnimation,
+    required this.greenLineAnimation,
+    required this.greenLineHeightAnimation,
+
+  });
+  final double blueLineAnimation;
+  final double greenLineAnimation;
+  final double greenLineHeightAnimation;
+
+
   @override
   void paint(Canvas canvas, Size size) {
     double strokeWidth = size.height * .18;
@@ -91,7 +126,7 @@ class FingressLogoPainter extends CustomPainter {
 
     canvas.drawLine(
       Offset(size.width * .0, size.height * .10),
-      Offset(size.width * .70 * animatedValue, size.height * .10),
+      Offset(size.width * .70 * blueLineAnimation, size.height * .10),
       yellowLine,
     );
 
@@ -106,7 +141,7 @@ class FingressLogoPainter extends CustomPainter {
 
     blueLinePath.moveTo(size.width * .70, size.height * .38);
     blueLinePath.lineTo(size.width * .09, size.height * .38);
-    blueLinePath.lineTo(size.width * .09, size.height * 1 * animatedValue);
+    blueLinePath.lineTo(size.width * .09, size.height * 1 * blueLineAnimation);
 
     canvas.drawPath(blueLinePath, blueLine);
 
@@ -119,9 +154,10 @@ class FingressLogoPainter extends CustomPainter {
       ..color = const Color.fromARGB(255, 54, 169, 1);
     final greenLinePath = Path();
 
-    greenLinePath.moveTo(size.width * .90, size.height * .0);
+    greenLinePath.moveTo(size.width * .90, size.height * greenLineHeightAnimation);
     greenLinePath.lineTo(size.width * .90, size.height * .65);
-    greenLinePath.lineTo(size.width * .30 * animatedValue, size.height * .65);
+    greenLinePath.lineTo(
+        size.width * .30 , size.height * .65);
 
     canvas.drawPath(greenLinePath, greenLine);
 
@@ -132,7 +168,7 @@ class FingressLogoPainter extends CustomPainter {
 
     canvas.drawLine(
       Offset(size.width * .30, size.height * .93),
-      Offset(size.width * 1 * animatedValue, size.height * .93),
+      Offset(size.width * 1 * blueLineAnimation, size.height * .93),
       redLine,
     );
   }
